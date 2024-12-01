@@ -1,45 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toggle Image and Play Audio</title>
+    <title>ギャラリー</title>
     <style>
-        img {
-            width: 200px;
-            height: auto;
-            cursor: pointer;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        audio {
-            display: none;
+
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 2rem 0;
+            font-weight: bold;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .gallery-image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-image:hover {
+            transform: scale(1.02);
+        }
+
+        .playing::after {
+            content: '♪ Now Playing';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .name {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .social-button {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: opacity 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-button:hover {
+            opacity: 0.8;
+        }
+
+        .x-button {
+            background-color: #000000;
+        }
+
+        .youtube-button {
+            background-color: #FF0000;
+        }
+
+        .twitch-button {
+            background-color: #6441A5;
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <img id="toggleImage" src="https://Nitona27.github.io/Vage/imageA.jpg" alt="Image A">
-    <audio id="audio" src="https://Nitona27.github.io/Vage/sound.wav"></audio>
+    <div class="logo">LOGO</div>
+    <div class="gallery">
+        <div class="gallery-item" id="item1">
+            <img src="images/imageA.jpg" alt="Galaxy 1" class="gallery-image" onclick="toggleMusic(this, 'audio1', 'item1')">
+            <audio id="audio1" src="audios/sound.wav"></audio>
+            <div class="name">name</div>
+            <div class="social-links">
+                <a href="https://x.com/?lang=ja" class="social-button x-button">X</a>
+                <a href="https://www.youtube.com/@TokyoChillPopBeats" class="social-button youtube-button">Youtube</a>
+                <a href="https://www.twitch.tv/mago2dgod" class="social-button twitch-button">Twitch</a>
+            </div>
+        </div>
+        <!-- 残りの5つのアイテムも同様にコピー -->
+        <div class="gallery-item" id="item2">
+            <img src="images/imageA.jpg" alt="Galaxy 2" class="gallery-image" onclick="toggleMusic(this, 'audio2', 'item2')">
+            <audio id="audio2" src="audios/sound.wav"></audio>
+            <div class="name">name</div>
+            <div class="social-links">
+                <a href="https://x.com/?lang=ja" class="social-button x-button">X</a>
+                <a href="https://www.youtube.com/@TokyoChillPopBeats" class="social-button youtube-button">Youtube</a>
+                <a href="https://www.twitch.tv/mago2dgod" class="social-button twitch-button">Twitch</a>
+            </div>
+        </div>
+        <!-- 残りのアイテムも同様... -->
+    </div>
 
     <script>
-        const imageElement = document.getElementById('toggleImage');
-        const audioElement = document.getElementById('audio');
-        let isImageA = true;
+        function toggleMusic(imgElement, audioId, itemId) {
+            const audio = document.getElementById(audioId);
+            const item = document.getElementById(itemId);
+            
+            if (audio.paused) {
+                // 他の音楽を停止し、画像とplayingクラスをリセット
+                document.querySelectorAll('audio').forEach(a => {
+                    a.pause();
+                    a.currentTime = 0;
+                });
+                document.querySelectorAll('.gallery-image').forEach(img => {
+                    img.src = "images/imageA.jpg";
+                });
+                document.querySelectorAll('.gallery-item').forEach(i => {
+                    i.classList.remove('playing');
+                });
 
-        imageElement.addEventListener('click', () => {
-            if (isImageA) {
-                imageElement.src = 'https://Nitona27.github.io/Vage/imageB.jpg';
-                audioElement.play();
+                // 選択された音楽を再生し、画像を変更
+                audio.play();
+                imgElement.src = "images/imageB.jpg";
+                item.classList.add('playing');
             } else {
-                imageElement.src = 'https://Nitona27.github.io/Vage/imageA.jpg';
-                audioElement.pause();
-                audioElement.currentTime = 0; // 再生位置をリセット
+                // 音楽を停止し、画像を元に戻す
+                audio.pause();
+                audio.currentTime = 0;
+                imgElement.src = "images/imageA.jpg";
+                item.classList.remove('playing');
             }
-            isImageA = !isImageA;
-        });
-
-        audioElement.addEventListener('ended', () => {
-            imageElement.src = 'https://Nitona27.github.io/Vage/imageA.jpg';
-            isImageA = true;
-        });
+        }
     </script>
 </body>
 </html>
