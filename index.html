@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ギャラリー</title>
+    <title>Vアゲ</title>
     <style>
         * {
             margin: 0;
@@ -28,9 +28,10 @@
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, minmax(0, 300px));
             gap: 2rem;
             margin-bottom: 2rem;
+            justify-content: center;
         }
 
         .gallery-item {
@@ -103,50 +104,152 @@
             background-color: #6441A5;
         }
 
-        @media (max-width: 768px) {
+        /* タブレット用 */
+        @media (min-width: 769px) and (max-width: 1024px) {
             .gallery {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, minmax(0, 250px));
+                gap: 1.5rem;
+            }
+            .social-button {
+                padding: 0.35rem 0.7rem;
+                font-size: 0.85rem;
             }
         }
 
+        /* スマートフォン用 */
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(2, minmax(0, 200px));
+                gap: 1rem;
+            }
+            .social-links {
+                gap: 0.4rem;
+            }
+            .social-button {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* 小さいスマートフォン用 */
         @media (max-width: 480px) {
             .gallery {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, minmax(0, 160px));
+                gap: 0.8rem;
+            }
+            .social-button {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.75rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="logo">LOGO</div>
-    <div class="gallery">
-        <div class="gallery-item" id="item1">
-            <img src="images/imageA.jpg" alt="Galaxy 1" class="gallery-image" onclick="toggleMusic(this, 'audio1', 'item1')">
-            <audio id="audio1" src="audios/sound.wav"></audio>
-            <div class="name">name</div>
-            <div class="social-links">
-                <a href="https://x.com/?lang=ja" class="social-button x-button">X</a>
-                <a href="https://www.youtube.com/@TokyoChillPopBeats" class="social-button youtube-button">Youtube</a>
-                <a href="https://www.twitch.tv/mago2dgod" class="social-button twitch-button">Twitch</a>
-            </div>
-        </div>
-        <!-- 残りの5つのアイテムも同様にコピー -->
-        <div class="gallery-item" id="item2">
-            <img src="images/imageA.jpg" alt="Galaxy 2" class="gallery-image" onclick="toggleMusic(this, 'audio2', 'item2')">
-            <audio id="audio2" src="audios/sound.wav"></audio>
-            <div class="name">name</div>
-            <div class="social-links">
-                <a href="https://x.com/?lang=ja" class="social-button x-button">X</a>
-                <a href="https://www.youtube.com/@TokyoChillPopBeats" class="social-button youtube-button">Youtube</a>
-                <a href="https://www.twitch.tv/mago2dgod" class="social-button twitch-button">Twitch</a>
-            </div>
-        </div>
-        <!-- 残りのアイテムも同様... -->
-    </div>
+    <div class="gallery" id="gallery"></div>
 
     <script>
+        // ギャラリーデータの一元管理
+        const galleryData = [
+            {
+                id: '51ae30fb-74e8-d0a6-c3a7-a932c1d59d7f',
+                name: 'Taeko',
+                images: {
+                    default: 'images/Taeko_A.jpg',
+                    active: 'images/Taeko_B.jpg'
+                },
+                audio: 'audios/Taeko_Voice.wav',
+                social: {
+                    x: 'https://x.com/?lang=ja',
+                    youtube: 'https://www.youtube.com/@TokyoChillPopBeats',
+                    twitch: 'https://www.twitch.tv/mago2dgod'
+                }
+            },
+            {
+                id: '2a2da3ce-790e-4397-ecd8-59f1047cca61',
+                name: 'Kirara',
+                images: {
+                    default: 'images/Kirara_A.jpg',
+                    active: 'images/Kirara_B.jpg'
+                },
+                audio: 'audios/Kirara_Voice.wav',
+                social: {
+                    x: 'https://x.com/?lang=ja',
+                    youtube: 'https://www.youtube.com/@TokyoChillPopBeats',
+                    twitch: 'https://www.twitch.tv/mago2dgod'
+                }
+            },
+            {
+                id: '096a7201-7571-27c7-4732-a5dbc0f42b97',
+                name: 'PEKORA',
+                images: {
+                    default: 'images/PEKORA_A.jpg',
+                    active: 'images/PEKORA_B.jpg'
+                },
+                audio: 'audios/PEKORA_Voice.wav',
+                social: {
+                    x: 'https://x.com/?lang=ja',
+                    youtube: 'https://www.youtube.com/@TokyoChillPopBeats',
+                    twitch: 'https://www.twitch.tv/mago2dgod'
+                }
+            },
+            
+            {
+                id: 'bd853b4b-3ae8-d2f9-f887-4a9c41e31c6f', // 他と被らないもの
+                name: 'AI', // Vtuberの名前
+                images: {
+                    default: 'images/AI_A.jpg', // Vtuberの音声再生前の画像
+                    active: 'images/AI_B.jpg' // Vtuberの音声再生中の画像
+                },
+                audio: 'audios/AI_Voice.wav', // Vtuberの音声
+                social: {
+                    x: 'https://x.com/?lang=ja', // Xのリンク
+                    youtube: 'https://www.youtube.com/@TokyoChillPopBeats',  // Youtuberのリンク
+                    twitch: 'https://www.twitch.tv/mago2dgod' // Twitchのリンク
+                }
+            },
+        ];
+
+        // ギャラリーの初期化
+        function initializeGallery() {
+            const galleryElement = document.getElementById('gallery');
+            
+            // configオブジェクトの生成
+            window.galleryConfig = {};
+
+            // HTMLの生成
+            galleryData.forEach((item, index) => {
+                // configの設定
+                galleryConfig[`item${index + 1}`] = {
+                    imageA: item.images.default,
+                    imageB: item.images.active,
+                    audio: item.audio
+                };
+
+                // ギャラリーアイテムのHTML生成
+                const itemHtml = `
+                    <div class="gallery-item" id="item${index + 1}">
+                        <img src="${item.images.default}" 
+                             alt="${item.id}" 
+                             class="gallery-image" 
+                             onclick="toggleMusic(this, 'audio${index + 1}', 'item${index + 1}')">
+                        <audio id="audio${index + 1}" src="${item.audio}"></audio>
+                        <div class="name">${item.name}</div>
+                        <div class="social-links">
+                            <a href="${item.social.x}" class="social-button x-button">X</a>
+                            <a href="${item.social.youtube}" class="social-button youtube-button">Youtube</a>
+                            <a href="${item.social.twitch}" class="social-button twitch-button">Twitch</a>
+                        </div>
+                    </div>
+                `;
+                galleryElement.insertAdjacentHTML('beforeend', itemHtml);
+            });
+        }
+
         function toggleMusic(imgElement, audioId, itemId) {
             const audio = document.getElementById(audioId);
             const item = document.getElementById(itemId);
+            const config = galleryConfig[itemId];
             
             if (audio.paused) {
                 // 他の音楽を停止し、画像とplayingクラスをリセット
@@ -155,7 +258,8 @@
                     a.currentTime = 0;
                 });
                 document.querySelectorAll('.gallery-image').forEach(img => {
-                    img.src = "images/imageA.jpg";
+                    const itemId = img.parentElement.id;
+                    img.src = galleryConfig[itemId].imageA;
                 });
                 document.querySelectorAll('.gallery-item').forEach(i => {
                     i.classList.remove('playing');
@@ -163,16 +267,25 @@
 
                 // 選択された音楽を再生し、画像を変更
                 audio.play();
-                imgElement.src = "images/imageB.jpg";
+                imgElement.src = config.imageB;
                 item.classList.add('playing');
+
+                // 音声再生終了時のイベントリスナー
+                audio.onended = function() {
+                    imgElement.src = config.imageA;
+                    item.classList.remove('playing');
+                };
             } else {
                 // 音楽を停止し、画像を元に戻す
                 audio.pause();
                 audio.currentTime = 0;
-                imgElement.src = "images/imageA.jpg";
+                imgElement.src = config.imageA;
                 item.classList.remove('playing');
             }
         }
+
+        // ギャラリーの初期化実行
+        initializeGallery();
     </script>
 </body>
 </html>
