@@ -245,15 +245,15 @@
                 const itemHtml = `
                     <div class="gallery-item" id="item${index + 1}">
                         <img src="${item.images.default}" 
-                             alt="${item.id}" 
-                             class="gallery-image" 
-                             onclick="toggleMusic(this, 'audio${index + 1}', 'item${index + 1}')">
+                            alt="${item.id}" 
+                            class="gallery-image" 
+                            onclick="toggleMusic(this, 'audio${index + 1}', 'item${index + 1}')">
                         <audio id="audio${index + 1}" src="${item.audio}"></audio>
                         <div class="name">${item.name}</div>
                         <div class="social-links">
-                            <a href="${item.social.x}" class="social-button x-button">X</a>
-                            <a href="${item.social.youtube}" class="social-button youtube-button">Youtube</a>
-                            <a href="${item.social.twitch}" class="social-button twitch-button">Twitch</a>
+                            <a href="${item.social.x}" class="social-button x-button" target="_blank" rel="noopener noreferrer">X</a>
+                            <a href="${item.social.youtube}" class="social-button youtube-button" target="_blank" rel="noopener noreferrer">Youtube</a>
+                            <a href="${item.social.twitch}" class="social-button twitch-button" target="_blank" rel="noopener noreferrer">Twitch</a>
                         </div>
                     </div>
                 `;
