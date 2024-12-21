@@ -11,19 +11,35 @@
             box-sizing: border-box;
         }
 
+        html {
+            background-color: #ffffff;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            max-width: 1200px;
+            background-image: url('images/Vagepattern.png');
+            background-position: center;
+            background-repeat: repeat;
             margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            height: 10000px;
             padding: 20px;
-            background-color: #f5f5f5;
         }
 
         .logo {
-            text-align: center;
-            font-size: 2.5rem;
-            margin: 2rem 0;
-            font-weight: bold;
+            width: 70vw;
+            height: calc(70vw * 0.8);
+            max-height: calc(400px * 0.8);
+            max-width: 400px;
+            background-position: center;
+            background-size: cover;
+            margin: auto;
+            background-image: url('images/Vage_Logo.png');
         }
 
         .gallery {
@@ -48,6 +64,7 @@
             cursor: pointer;
             border-radius: 8px;
             transition: transform 0.3s ease;
+            box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .5);
         }
 
         .gallery-image:hover {
@@ -68,7 +85,9 @@
 
         .name {
             margin-top: 1rem;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333333;
         }
 
         .social-links {
@@ -145,8 +164,10 @@
     </style>
 </head>
 <body>
-    <div class="logo">LOGO</div>
-    <div class="gallery" id="gallery"></div>
+    <div class="container">
+        <div class="logo"></div>
+        <div class="gallery" id="gallery"></div>
+    </div>
 
     <script>
         // ギャラリーデータの一元管理
@@ -211,7 +232,7 @@
 
             {
                 id: 'c3aa22b0-25a4-f0ad-74d0-f18efe2698d9', // 他と被らないもの
-                name: 'Marin', // Vtuberの名前
+                name: '宝鐘マリン', // Vtuberの名前
                 images: {
                     default: 'images/MARIN_A.jpg', // Vtuberの音声再生前の画像
                     active: 'images/MARIN_B.jpg' // Vtuberの音声再生中の画像
