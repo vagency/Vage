@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vアゲ</title>
+
+    <!-- Firebase Scripts -->
+    <script defer src="/__/firebase/11.3.1/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/11.3.1/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+
+    <!-- Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RRBVFW5Z1Y"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RRBVFW5Z1Y');
+    </script>
+
     <style>
         * {
             margin: 0;
@@ -17,7 +32,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-image: url('images/Vagepattern.png');
+            background-image: url('../images/Vagepattern.png');
             background-position: center;
             background-repeat: repeat;
             margin: 0 auto;
@@ -45,7 +60,7 @@
             background-size: cover;
             margin: auto;
             margin-top: 8px;
-            background-image: url('images/Vage_Logo02.png');
+            background-image: url('../images/Vage_Logo.png');
         }
 
         .instruction-text {
@@ -123,36 +138,18 @@
         }
 
         .social-links {
-            display: flex;
-            gap: 0.8rem;
-            margin-top: 0.8rem;
+            display: flex; /* フレックスボックスでアイコンを並べる */
+            flex-wrap: wrap; /* アイコンがはみ出る場合は折り返す */
+            justify-content: center; /* 中央揃え */
+            gap: 8px; /* アイコン間の隙間 */
+            max-width: 100%; /* 親要素内で幅を制限 */
+            overflow: hidden; /* 必要に応じて溢れる部分を隠す */
         }
 
-        .social-button {
-            padding: 0.4rem 0.8rem;
-            border: none;
-            border-radius: 4px;
-            color: white;
+        .social-icon {
+            height: 32px; /* 高さを固定 */
+            width: auto; /* 幅を自動調整 */
             cursor: pointer;
-            font-size: 0.9rem;
-            transition: opacity 0.3s ease;
-            text-decoration: none;
-        }
-
-        .social-button:hover {
-            opacity: 0.8;
-        }
-
-        .x-button {
-            background-color: #000000;
-        }
-
-        .youtube-button {
-            background-color: #FF0000;
-        }
-
-        .twitch-button {
-            background-color: #6441A5;
         }
 
         .about {
@@ -219,27 +216,7 @@
         }
     </style>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RRBVFW5Z1Y"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-RRBVFW5Z1Y');
-</script>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NDN9D87H');</script>
-<!-- End Google Tag Manager -->
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDN9D87H"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
     <div class="container">
         <div class="logo"></div>
         <p class="instruction-text">気になるVをタップでボイスがきけます！</p>
@@ -251,49 +228,61 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 ご連絡先 : <a href="mailto:vagency.2107@gmail.com">vagency.2107@gmail.com</a>
             </p>
             <a href="https://x.com/Vagency_1" target="_blank" rel="noopener noreferrer">
-                <dev class="social-button x-button">X</dev>
+                <img src="../images/X_icon.png" class="social-icon" alt="X">
             </a>
         </div>
         <footer>© 2024 Vagency</footer>
-    
     </div>
+
     <script>
+        // Firebase Analyticsの初期化
+        document.addEventListener('DOMContentLoaded', function () {
+            const analytics = firebase.analytics();
+
+            // Analyticsイベント記録例
+            analytics.logEvent('page_view', {
+                page_title: document.title,
+                page_location: window.location.href,
+                page_path: window.location.pathname
+            });
+        });
+
         // ギャラリーデータの一元管理
         const galleryData = [
             {
                 id: '51ae30fb-74e8-d0a6-c3a7-a932c1d59d7f',
                 name: '梅雨傘はれい',
                 images: {
-                    default: 'images/TsuyugasaHaley_A.jpg',
-                    active: 'images/TsuyugasaHaley_B.jpg'
+                    default: '../images/TsuyugasaHaley_A.jpg',
+                    active: '../images/TsuyugasaHaley_B.jpg'
                 },
                 audio: 'audios/TsuyugasaHaley_Voice.mp3',
                 social: {
                     x: 'https://x.com/tsuyugasa_haley',
                     youtube: 'https://www.youtube.com/@Tsuyugasa_Haley?sub_confirmation=1',
-                    TikTok: 'https://www.tiktok.com/@tsuyugasa_haley'
+                    tiktok: 'https://www.tiktok.com/@tsuyugasa_haley'
                 }
             },
             {
                 id: '2a2da3ce-790e-4397-ecd8-59f1047cca61',
                 name: '雲龍シルク',
                 images: {
-                    default: 'images/UnryuShiruku_A.jpg',
-                    active: 'images/UnryuShiruku_B.jpg'
+                    default: '../images/UnryuShiruku_A.jpg',
+                    active: '../images/UnryuShiruku_B.jpg'
                 },
                 audio: 'audios/UnryuShiruku_Voice.mp3',
                 social: {
                     x: 'https://x.com/Unryu_Shiruku',
                     youtube: 'https://www.youtube.com/@Unryu.Shiruku?sub_confirmation=1',
-                    a17Live: 'https://17.live/ja/live/28230834'
+                    a17live: 'https://17.live/ja/live/28230834'
                 }
             },
             {
                 id: '096a7201-7571-27c7-4732-a5dbc0f42b97',
                 name: '紅音ひびき',
                 images: {
-                    default: 'images/AkaneHibiki_A.jpg',
-                    active: 'images/AkaneHibiki_B.jpg'
+                    default: '../images/AkaneHibiki_A.jpg',
+                    active: '../images/AkaneHibiki_B.jpg'
                 },
                 audio: 'audios/AkaneHibiki_Voice.mp3',
                 social: {
@@ -307,14 +296,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 id: 'bd853b4b-3ae8-d2f9-f887-4a9c41e31c6f', // 他と被らないもの
                 name: '恋々音るる', // Vtuberの名前
                 images: {
-                    default: 'images/KokoneRuru_A.jpg', // Vtuberの音声再生前の画像
-                    active: 'images/KokoneRuru_B.jpg' // Vtuberの音声再生中の画像
+                    default: '../images/KokoneRuru_A.jpg', // Vtuberの音声再生前の画像
+                    active: '../images/KokoneRuru_B.jpg' // Vtuberの音声再生中の画像
                 },
                 audio: 'audios/KokoneRuru_Voice.mp3', // Vtuberの音声
                 social: {
                     x: 'https://x.com/Ruru_Kokone', // Xのリンク
                     youtube: 'https://www.youtube.com/channel/UCyxuSChVfqw5hVCUwSwbkTQ?sub_confirmation=1',  // Youtuberのリンク
-                    TikTok: 'https://www.tiktok.com/@ruru_kokone?lang=ja-JP' // Twitchのリンク
+                    tiktok: 'https://www.tiktok.com/@ruru_kokone?lang=ja-JP' // Twitchのリンク
                 }
             },
 
@@ -322,8 +311,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 id: 'c3aa22b0-25a4-f0ad-74d0-f18efe2698d9', // 他と被らないもの
                 name: '七竈なな', // Vtuberの名前
                 images: {
-                    default: 'images/NanakamadoNana_A.jpg', // Vtuberの音声再生前の画像
-                    active: 'images/NanakamadoNana_B.jpg' // Vtuberの音声再生中の画像
+                    default: '../images/NanakamadoNana_A.jpg', // Vtuberの音声再生前の画像
+                    active: '../images/NanakamadoNana_B.jpg' // Vtuberの音声再生中の画像
                 },
                 audio: 'audios/NanakamadoNana_Voice.mp3', // Vtuberの音声
                 social: {
@@ -337,8 +326,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 id: '74337e44-80b0-455b-f6f6-652277896288', // 他と被らないもの
                 name: '羽鵐衣そあ', // Vtuberの名前
                 images: {
-                    default: 'images/BabuiSoa_A.jpg', // Vtuberの音声再生前の画像
-                    active: 'images/BabuiSoa_B.jpg' // Vtuberの音声再生中の画像
+                    default: '../images/BabuiSoa_A.jpg', // Vtuberの音声再生前の画像
+                    active: '../images/BabuiSoa_B.jpg' // Vtuberの音声再生中の画像
                 },
                 audio: 'audios/BabuiSoa_Voice.mp3', // Vtuberの音声
                 social: {
@@ -352,8 +341,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 id: 'bc52c1ad-da74-4769-ba34-88f9f9dc68b7', // 他と被らないもの
                 name: 'Unknown', // Vtuberの名前
                 images: {
-                    default: 'images/Unknown_A.jpg', // Vtuberの音声再生前の画像
-                    active: 'images/Unknown_B.jpg' // Vtuberの音声再生中の画像
+                    default: '../images/Unknown_A.jpg', // Vtuberの音声再生前の画像
+                    active: '../images/Unknown_B.jpg' // Vtuberの音声再生中の画像
                 },
                 audio: 'audios/ASUKA_Voice.wav', // Vtuberの音声
                 social: {
@@ -367,8 +356,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 id: '72325eaa-f4b5-6853-9de6-697b320fe6f7', // 他と被らないもの
                 name: 'エレ', // Vtuberの名前
                 images: {
-                    default: 'images/Ere_A.jpg', // Vtuberの音声再生前の画像
-                    active: 'images/Ere_B.jpg' // Vtuberの音声再生中の画像
+                    default: '../images/Ere_A.jpg', // Vtuberの音声再生前の画像
+                    active: '../images/Ere_B.jpg' // Vtuberの音声再生中の画像
                 },
                 audio: 'audios/Ere_Voice.mp3', // Vtuberの音声
                 social: {
@@ -379,81 +368,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             },
         ];
 
-        // ギャラリーの初期化
-        function initializeGallery() {
+         // ギャラリー初期化
+         function initializeGallery() {
             const galleryElement = document.getElementById('gallery');
-            
-            // configオブジェクトの生成
-            window.galleryConfig = {};
-
-            // HTMLの生成
-            galleryData.forEach((item, index) => {
-                // configの設定
-                galleryConfig[`item${index + 1}`] = {
-                    imageA: item.images.default,
-                    imageB: item.images.active,
-                    audio: item.audio
-                };
-
-                // ギャラリーアイテムのHTML生成
+            galleryData.forEach((item) => {
+                const socialLinks = `
+                    ${item.social.x ? `<a href="${item.social.x}" target="_blank"><img src="../images/X_icon.png" class="social-icon" alt="X"></a>` : ''}
+                    ${item.social.youtube ? `<a href="${item.social.youtube}" target="_blank"><img src="../images/Youtube_icon.png" class="social-icon" alt="YouTube"></a>` : ''}
+                    ${item.social.twitch ? `<a href="${item.social.twitch}" target="_blank"><img src="../images/Twitch_icon.png" class="social-icon" alt="Twitch"></a>` : ''}
+                    ${item.social.tiktok ? `<a href="${item.social.tiktok}" target="_blank"><img src="../images/TikTok_icon.png" class="social-icon" alt="TikTok"></a>` : ''}
+                    ${item.social.a17live ? `<a href="${item.social.a17live}" target="_blank"><img src="../images/a17live_icon.png" class="social-icon" alt="17Live"></a>` : ''}
+                    ${item.social.a17live ? `<a href="${item.social.a17live}" target="_blank"><img src="../images/IRIAM_icon.png" class="social-icon" alt="IRIAM"></a>` : ''}
+                    
+                `;
                 const itemHtml = `
-                    <div class="gallery-item" id="item${index + 1}">
-                        <img src="${item.images.default}" 
-                            alt="${item.id}" 
-                            class="gallery-image" 
-                            onclick="toggleMusic(this, 'audio${index + 1}', 'item${index + 1}')">
-                        <audio id="audio${index + 1}" src="${item.audio}"></audio>
+                    <div class="gallery-item">
+                        <img src="${item.images.default}" class="gallery-image">
+                        <audio src="${item.audio}"></audio>
                         <div class="name">${item.name}</div>
-                        <div class="social-links">
-                            <a href="${item.social.x}" class="social-button x-button" target="_blank" rel="noopener noreferrer">X</a>
-                            <a href="${item.social.youtube}" class="social-button youtube-button" target="_blank" rel="noopener noreferrer">Youtube</a>
-                            <a href="${item.social.twitch}" class="social-button twitch-button" target="_blank" rel="noopener noreferrer">Twitch</a>
-                        </div>
+                        <div class="social-links">${socialLinks}</div>
                     </div>
                 `;
                 galleryElement.insertAdjacentHTML('beforeend', itemHtml);
             });
         }
-
-        function toggleMusic(imgElement, audioId, itemId) {
-            const audio = document.getElementById(audioId);
-            const item = document.getElementById(itemId);
-            const config = galleryConfig[itemId];
-            
-            if (audio.paused) {
-                // 他の音楽を停止し、画像とplayingクラスをリセット
-                document.querySelectorAll('audio').forEach(a => {
-                    a.pause();
-                    a.currentTime = 0;
-                });
-                document.querySelectorAll('.gallery-image').forEach(img => {
-                    const itemId = img.parentElement.id;
-                    img.src = galleryConfig[itemId].imageA;
-                });
-                document.querySelectorAll('.gallery-item').forEach(i => {
-                    i.classList.remove('playing');
-                });
-
-                // 選択された音楽を再生し、画像を変更
-                audio.play();
-                imgElement.src = config.imageB;
-                item.classList.add('playing');
-
-                // 音声再生終了時のイベントリスナー
-                audio.onended = function() {
-                    imgElement.src = config.imageA;
-                    item.classList.remove('playing');
-                };
-            } else {
-                // 音楽を停止し、画像を元に戻す
-                audio.pause();
-                audio.currentTime = 0;
-                imgElement.src = config.imageA;
-                item.classList.remove('playing');
-            }
-        }
-
-        // ギャラリーの初期化実行
         initializeGallery();
     </script>
 </body>
