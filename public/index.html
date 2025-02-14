@@ -371,7 +371,18 @@
          // ギャラリー初期化
          function initializeGallery() {
             const galleryElement = document.getElementById('gallery');
-            galleryData.forEach((item) => {
+            
+            // configオブジェクトの生成
+            window.galleryConfig = {};
+
+            // HTMLの生成
+            galleryData.forEach((item, index) => {
+                // configの設定
+                galleryConfig[`item${index + 1}`] = {
+                    imageA: item.images.default,
+                    imageB: item.images.active,
+                    audio: item.audio
+                };
                 const socialLinks = `
                     ${item.social.x ? `<a href="${item.social.x}" target="_blank"><img src="images/X_icon.png" class="social-icon" alt="X"></a>` : ''}
                     ${item.social.youtube ? `<a href="${item.social.youtube}" target="_blank"><img src="images/Youtube_icon.png" class="social-icon" alt="YouTube"></a>` : ''}
@@ -382,9 +393,12 @@
                     
                 `;
                 const itemHtml = `
-                    <div class="gallery-item">
-                        <img src="${item.images.default}" class="gallery-image">
-                        <audio src="${item.audio}"></audio>
+                    <div class="gallery-item" id="item${index + 1}">
+                        <img src="${item.images.default}" 
+                            alt="${item.id}" 
+                            class="gallery-image" 
+                            onclick="toggleMusic(this, 'audio${index + 1}', 'item${index + 1}')">
+                        <audio id="audio${index + 1}" src="${item.audio}"></audio>
                         <div class="name">${item.name}</div>
                         <div class="social-links">${socialLinks}</div>
                     </div>
@@ -392,6 +406,45 @@
                 galleryElement.insertAdjacentHTML('beforeend', itemHtml);
             });
         }
+
+        function toggleMusic(imgElement, audioId, itemId) {
+            const audio = document.getElementById(audioId);
+            const item = document.getElementById(itemId);
+            const config = galleryConfig[itemId];
+            
+            if (audio.paused) {
+                // 他の音楽を停止し、画像とplayingクラスをリセット
+                document.querySelectorAll('audio').forEach(a => {
+                    a.pause();
+                    a.currentTime = 0;
+                });
+                document.querySelectorAll('.gallery-image').forEach(img => {
+                    const itemId = img.parentElement.id;
+                    img.src = galleryConfig[itemId].imageA;
+                });
+                document.querySelectorAll('.gallery-item').forEach(i => {
+                    i.classList.remove('playing');
+                });
+
+                // 選択された音楽を再生し、画像を変更
+                audio.play();
+                imgElement.src = config.imageB;
+                item.classList.add('playing');
+
+                // 音声再生終了時のイベントリスナー
+                audio.onended = function() {
+                    imgElement.src = config.imageA;
+                    item.classList.remove('playing');
+                };
+            } else {
+                // 音楽を停止し、画像を元に戻す
+                audio.pause();
+                audio.currentTime = 0;
+                imgElement.src = config.imageA;
+                item.classList.remove('playing');
+            }
+        }
+
         initializeGallery();
     </script>
 </body>
