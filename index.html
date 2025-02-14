@@ -31,20 +31,47 @@
         }
 
         footer {
-            margin: 160px auto 120px auto;
+            margin: 80px auto 120px auto;
             text-align: center;
             color: #777777;
         }
 
         .logo {
             width: 70vw;
-            height: calc(70vw * 0.8);
-            max-height: calc(400px * 0.8);
+            height: calc(70vw * 0.6);
+            max-height: calc(400px * 0.6);
             max-width: 400px;
             background-position: center;
             background-size: cover;
             margin: auto;
-            background-image: url('images/Vage_Logo.png');
+            margin-top: 8px;
+            background-image: url('images/Vage_Logo02.png');
+        }
+
+        .instruction-text {
+            text-align: center;
+            font-size: 1rem;
+            margin: 1.5rem 0;
+            color: #555;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
+            font-weight: bold;
+            letter-spacing: 1px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                transform: translateY(-5px) scale(1.05);
+                text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15), -4px -4px 10px rgba(255, 255, 255, 0.6);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
+            }
         }
 
         .gallery {
@@ -128,6 +155,30 @@
             background-color: #6441A5;
         }
 
+        .about {
+            text-align: center;
+            margin: 4rem 24px 2rem 24px;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .about h2 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .about a {
+            color: #007BFF;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .about a:hover {
+            color: #0056b3;
+        }
+
         /* タブレット用 */
         @media (min-width: 769px) and (max-width: 1024px) {
             .gallery {
@@ -191,8 +242,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!-- End Google Tag Manager (noscript) -->
     <div class="container">
         <div class="logo"></div>
+        <p class="instruction-text">気になるVをタップでボイスがきけます！</p>
         <div class="gallery" id="gallery"></div>
+        <div class="about">
+            <h2>「Vあげ」とは？</h2>
+            <p>
+                V文化が好きなクリエイターが集まり、Vさんを広めたり活動のお手伝いをする有志グループになります！<br>
+                ご連絡先 : <a href="mailto:vagency.2107@gmail.com">vagency.2107@gmail.com</a>
+            </p>
+            <a href="https://x.com/Vagency_1" target="_blank" rel="noopener noreferrer">
+                <dev class="social-button x-button">X</dev>
+            </a>
+        </div>
         <footer>© 2024 Vagency</footer>
+    
     </div>
     <script>
         // ギャラリーデータの一元管理
