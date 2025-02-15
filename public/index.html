@@ -83,15 +83,16 @@
             /* 画面サイズ別の調整 */
             @media (max-width: 768px) {
             .instruction-image {
-            max-width: 85%; /* タブレットでは縮小を少し緩める */
+            max-width: 90%; /* タブレットではほぼフルサイズ */
             }
-            }
+        }
 
             @media (max-width: 480px) {
             .instruction-image {
-            max-width: 90%; /* 小さいスマホではほぼフルサイズにする */
+            max-width: 100%; /* スマホではフルサイズで表示 */
             }
         }
+
 
             /* 既存のアニメーション（そのまま適用） */
             @keyframes float {
