@@ -62,32 +62,54 @@
             margin-top: 8px;
             background-image: url('images/Vage_Logo.png');
         }
-
+/* ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ */
+/* ここから変更したCSS */
+/* ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ */
         .instruction-text {
-            text-align: center;
-            font-size: 1rem;
-            margin: 1.5rem 0;
-            color: #555;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
-            font-weight: bold;
-            letter-spacing: 1px;
-            animation: float 3s ease-in-out infinite;
-        }
+        text-align: center;
+        margin: 1.5rem 0;
+    }
 
-        @keyframes float {
-            0% {
-                transform: translateY(0) scale(1);
-                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
-            }
-            50% {
-                transform: translateY(-5px) scale(1.05);
-                text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15), -4px -4px 10px rgba(255, 255, 255, 0.6);
-            }
-            100% {
-                transform: translateY(0) scale(1);
-                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
-            }
+        /* 画像のサイズ調整とアニメーション適用 */
+        .instruction-image {
+        max-width: 90%; /* 画面サイズに応じて縮小 */
+        height: auto; /* 縦横比を維持 */
+        display: block;
+        margin: 0 auto; /* 画像を中央配置 */
+        animation: float 3s ease-in-out infinite; /* フワフワ動くアニメーションを適用 */
+    }
+
+        /* 画面サイズ別の調整 */
+        @media (max-width: 768px) {
+        .instruction-image {
+        max-width: 80%; /* タブレットでは縮小 */
         }
+    }
+
+        @media (max-width: 480px) {
+        .instruction-image {
+        max-width: 75%; /* 小さいスマホでさらに縮小 */
+        }
+    }
+
+        /* 既存のアニメーション（そのまま適用） */
+        @keyframes float {
+        0% {
+        transform: translateY(0) scale(1);
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
+        }
+        50% {
+        transform: translateY(-5px) scale(1.05);
+        text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15), -4px -4px 10px rgba(255, 255, 255, 0.6);
+        }
+        100% {
+        transform: translateY(0) scale(1);
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
+        }
+    }
+/* ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ */
+/* ここまで変更したCSS */
+/* ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ */
 
         .gallery {
             display: grid;
