@@ -78,6 +78,13 @@
 /* ここから変更したCSS */
 /* ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ */
 
+            .instruction-image-wrapper {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
             /* 画像のサイズ調整とアニメーション適用 */
             .instruction-image {
             max-width: 90%; /* PCではほぼフルサイズ */
@@ -250,15 +257,16 @@
     </style>
         </head>
         <body>
-              <div class="container">
-            　<div class="logo"></div>
-            　<div class="instruction-image-wrapper">
-                <img src="images/instruction_telop.png" alt="気になるVをタップでボイスがきけます！" class="instruction-image">
-            　</div>
-            　<div class="gallery" id="gallery"></div>
-        </div> <!-- ✅ ここで .container を閉じる！ -->
+    　<div class="container">
+             <div class="logo"></div>
+             <div class="instruction-image-wrapper">
+             <img src="images/instruction_telop.png" alt="気になるVをタップでボイスがきけます！" class="instruction-image">
+             </div>
+             <div class="gallery" id="gallery"></div>
+    </div> <!-- ✅ ここで .container を閉じる！ -->
 
-        <footer> <!-- ✅ .container の外に出す！ -->
+    <footer> <!-- ✅ .container の外に出す！ -->
+
              <div class="footer-content">
              <h2>「Vあげ」とは？</h2>
              <p>
