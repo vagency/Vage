@@ -66,52 +66,52 @@
 /* ここから変更したCSS */
 /* ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ */
 
-.instruction-text {
-    text-align: center;
-    margin: 1.5rem 0;
-}
+            .instruction-text {
+            text-align: center;
+            margin: 1.5rem 0;
+            }
 
-/* 画像のサイズ調整とアニメーション適用 */
-.instruction-image {
-    max-width: 90%; /* PCではほぼフルサイズ */
-    height: auto; /* 縦横比を維持 */
-    display: block;
-    margin: 0 auto; /* 画像を中央配置 */
-    animation: float 3s ease-in-out infinite; /* フワフワ動くアニメーションを適用 */
-}
+            /* 画像のサイズ調整とアニメーション適用 */
+            .instruction-image {
+            max-width: 90%; /* PCではほぼフルサイズ */
+            height: auto; /* 縦横比を維持 */
+            display: block;
+            margin: 0 auto; /* 画像を中央配置 */
+            animation: float 3s ease-in-out infinite; /* フワフワ動くアニメーションを適用 */
+            }
 
-/* 画面サイズ別の調整 */
-@media (max-width: 768px) {
-    .instruction-image {
-        max-width: 85%; /* タブレットでは縮小を少し緩める */
-    }
-}
+            /* 画面サイズ別の調整 */
+            @media (max-width: 768px) {
+            .instruction-image {
+            max-width: 85%; /* タブレットでは縮小を少し緩める */
+            }
+            }
 
-@media (max-width: 480px) {
-    .instruction-image {
-        max-width: 90%; /* 小さいスマホではほぼフルサイズにする */
-    }
-}
+            @media (max-width: 480px) {
+            .instruction-image {
+            max-width: 90%; /* 小さいスマホではほぼフルサイズにする */
+            }
+        }
 
-/* 既存のアニメーション（そのまま適用） */
-@keyframes float {
-    0% {
-        transform: translateY(0) scale(1);
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
-    }
-    50% {
-        transform: translateY(-5px) scale(1.05);
-        text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15), -4px -4px 10px rgba(255, 255, 255, 0.6);
-    }
-    100% {
-        transform: translateY(0) scale(1);
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
-    }
-}
+            /* 既存のアニメーション（そのまま適用） */
+            @keyframes float {
+            0% {
+            transform: translateY(0) scale(1);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+            transform: translateY(-5px) scale(1.05);
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15), -4px -4px 10px rgba(255, 255, 255, 0.6);
+            }
+            100% {
+            transform: translateY(0) scale(1);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.5);
+            }
+        }
 
-/* ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ */
-/* ここまで変更したCSS */
-/* ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ */
+            /* ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ */
+            /* ここまで変更したCSS */
+            /* ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ */
 
 
         .gallery {
