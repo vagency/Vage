@@ -294,17 +294,27 @@
 
     </div>
 
-    <!-- 🔹 変更開始（2025-02-17） -->
-<!-- 🔹 Firebase Analytics のカスタムイベント（オーディオ再生 & 外部リンククリック）を追加 -->
-
+<!-- 🔹 変更開始（2025-02-17） -->
+<!-- 🔹 Firebase Analytics のデバッグログ追加 -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+      console.log("🔥 Firebase Analytics 初期化開始");
+
       if (typeof firebase === 'undefined') {
-          console.error('Firebase がロードされていません！');
+          console.error("🚨 Firebase がロードされていません！");
           return;
       }
 
+      console.log("✅ Firebase は正常にロードされています！");
       const analytics = firebase.analytics();
+
+      console.log("✅ Firebase Analytics インスタンス取得:", analytics);
+
+      // ✅ デバッグ用テストイベントを送信
+      analytics.logEvent('test_event', {
+          message: 'これはテストイベントです'
+      });
+      console.log("📡 test_event を送信しました！");
 
       // ✅ ページビューの記録（変更なし）
       analytics.logEvent('page_view', {
@@ -312,6 +322,7 @@
           page_location: window.location.href,
           page_path: window.location.pathname
       });
+      console.log("📡 page_view を送信しました！");
 
       // ✅ 画像クリックでオーディオ再生を記録
       document.querySelectorAll('.gallery-image').forEach((image) => {
@@ -323,7 +334,7 @@
                   vtuber_name: vtuberName
               });
 
-              console.log(`オーディオ再生記録: ${vtuberName}`);
+              console.log(`🎵 オーディオ再生記録: ${vtuberName}`);
           });
       });
 
@@ -341,16 +352,16 @@
                   link_url: linkUrl
               });
 
-              console.log(`リンククリック記録: ${linkUrl}`);
+              console.log(`🔗 リンククリック記録: ${linkUrl}`);
           }
       });
 
-      console.log('Firebase Analytics のカスタムイベント設定完了！');
+      console.log('✅ Firebase Analytics のカスタムイベント設定完了！');
   });
-</script>
+      </script>
+      <!-- 🔹 変更終了（2025-02-17） -->
 
-<!-- 🔹 変更終了（2025-02-17） -->
-<script>
+      <script>
         // ギャラリーデータの一元管理
         const galleryData = [
             {
