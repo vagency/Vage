@@ -18,74 +18,7 @@
       gtag('js', new Date());
       gtag('config', 'G-RRBVFW5Z1Y');
     </script>
-    <!-- 🔹 ここに計測用コードを1回だけ追加！ -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Google Analytics の gtag() 確認
-      if (typeof gtag !== 'function') {
-          console.warn('Google Analyticsが正しく読み込まれていません');
-          return;
-      }
 
-      // ① 画像をクリックしてオーディオを再生した場合の計測
-      document.querySelectorAll('.gallery-image').forEach((image) => {
-          image.addEventListener('click', function () {
-              const parentItem = this.closest('.gallery-item');
-              const vtuberName = parentItem.querySelector('.name').textContent.trim();
-              const audioSrc = parentItem.querySelector('audio').src;
-
-              gtag('event', 'audio_play', {
-                  'event_category': 'voice_play',
-                  'event_label': vtuberName,
-                  'value': 1
-              });
-
-              console.log(`オーディオ再生: ${vtuberName} (${audioSrc})`);
-          });
-      });
-
-      // ② 外部リンクのクリックを計測
-      document.body.addEventListener('click', function (event) {
-          let target = event.target;
-          
-          // aタグ（リンク）がクリックされたかチェック
-          while (target && target.tagName !== 'A') {
-              target = target.parentElement;
-          }
-          
-          if (target && target.tagName === 'A' && target.href) {
-              const linkUrl = target.href;
-              const linkText = target.textContent.trim();
-              
-              gtag('event', 'external_link_click', {
-                  'event_category': 'link_click',
-                  'event_label': linkText || linkUrl,
-                  'value': 1
-              });
-
-              console.log(`リンククリック: ${linkText} (${linkUrl})`);
-          }
-      });
-
-      // ③ サイトアクセス数（既に gtag の page_view で計測済み）
-      gtag('event', 'page_view', {
-          'event_category': 'site_visit',
-          'event_label': document.title,
-          'value': 1
-      });
-
-      console.log('ページビュー計測完了');
-  });
-</script>
-
-<!-- 🔹 変更点メモ -->
-<!--  
-✅ Google Analytics の計測用コードを gtag の設定の後に追加 
-✅ 計測内容：
-  1️⃣ 画像クリックでオーディオ再生を記録（audio_play）
-  2️⃣ 外部リンククリックを記録（external_link_click）
-  3️⃣ ページビュー（page_view）は元から計測されている
--->
     <style>
         * {
             margin: 0;
