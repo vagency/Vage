@@ -294,18 +294,62 @@
 
     </div>
 
-    <script>
-        // Firebase Analyticsの初期化
-        document.addEventListener('DOMContentLoaded', function () {
-            const analytics = firebase.analytics();
+    <!-- 🔹 変更開始（2025-02-17） -->
+<!-- 🔹 Firebase Analytics のカスタムイベント（オーディオ再生 & 外部リンククリック）を追加 -->
 
-            // Analyticsイベント記録例
-            analytics.logEvent('page_view', {
-                page_title: document.title,
-                page_location: window.location.href,
-                page_path: window.location.pathname
-            });
-        });
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      if (typeof firebase === 'undefined') {
+          console.error('Firebase がロードされていません！');
+          return;
+      }
+
+      const analytics = firebase.analytics();
+
+      // ✅ ページビューの記録（変更なし）
+      analytics.logEvent('page_view', {
+          page_title: document.title,
+          page_location: window.location.href,
+          page_path: window.location.pathname
+      });
+
+      // ✅ 画像クリックでオーディオ再生を記録
+      document.querySelectorAll('.gallery-image').forEach((image) => {
+          image.addEventListener('click', function () {
+              const parentItem = this.closest('.gallery-item');
+              const vtuberName = parentItem.querySelector('.name').textContent.trim();
+              
+              analytics.logEvent('audio_play', {
+                  vtuber_name: vtuberName
+              });
+
+              console.log(`オーディオ再生記録: ${vtuberName}`);
+          });
+      });
+
+      // ✅ 外部リンククリックを記録
+      document.body.addEventListener('click', function (event) {
+          let target = event.target;
+          while (target && target.tagName !== 'A') {
+              target = target.parentElement;
+          }
+
+          if (target && target.tagName === 'A' && target.href) {
+              const linkUrl = target.href;
+              
+              analytics.logEvent('external_link_click', {
+                  link_url: linkUrl
+              });
+
+              console.log(`リンククリック記録: ${linkUrl}`);
+          }
+      });
+
+      console.log('Firebase Analytics のカスタムイベント設定完了！');
+  });
+</script>
+
+<!-- 🔹 変更終了（2025-02-17） -->
 
         // ギャラリーデータの一元管理
         const galleryData = [
